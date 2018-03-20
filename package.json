@@ -1,0 +1,27 @@
+{
+  "name": "factory-girl-typeorm",
+  "version": "0.0.1",
+  "description": "Typeorm adapter for factory-girl",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wymsee/factory-girl-typeorm.git"
+  },
+  "keywords": [
+    "typeorm",
+    "factory-girl"
+  ],
+  "author": "SyncOnSet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wymsee/factory-girl-typeorm/issues"
+  },
+  "homepage": "https://github.com/wymsee/factory-girl-typeorm#readme",
+  "dependencies": {
+    "factory-girl": "^5.0.2",
+    "typeorm": "^0.1.16"
+  }
+}
