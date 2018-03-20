@@ -1,8 +1,5 @@
-const DefaultAdapter = require('factory-girl').DefaultAdapter;
-
-class TypeOrmAdapter extends DefaultAdapter {
+class TypeOrmAdapter {
     constructor(connection) {
-        super();
         this.connection = connection;
     }
 
