@@ -1,6 +1,6 @@
 {
   "name": "factory-girl-typeorm",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Typeorm adapter for factory-girl",
   "main": "index.js",
   "scripts": {
