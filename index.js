@@ -4,10 +4,7 @@ class TypeOrmAdapter {
     }
 
     build(Model, props) {
-        const model = new Model();
-        Object.keys(props).forEach((key) => {
-            model[key] = props[key];
-        });
+        const model = new Model(props);
         return model;
     }
 
