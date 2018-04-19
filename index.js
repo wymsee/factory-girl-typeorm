@@ -15,9 +15,9 @@ class TypeOrmAdapter {
     async destroy(model, Model) {
         const manager = this.connection.manager;
         const modelRepo = manager.getRepository(Model);
-        const theModel = await modelRepo.findOneById(model.id);
+        const theModel = await modelRepo.findOne(model.id);
         if (theModel) {
-            return await manager.removeById(Model, model.id);
+            return await manager.delete(Model, model.id);
         } else {
             return;
         }
