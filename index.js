@@ -17,9 +17,11 @@ class TypeOrmAdapter {
         const modelRepo = manager.getRepository(Model);
         const theModel = await modelRepo.findOne(model.id);
         if (theModel) {
-            await manager.query('SET FOREIGN_KEY_CHECKS=0;');
-            await manager.delete(Model, model.id);
-            return await manager.query('SET FOREIGN_KEY_CHECKS=1;');
+            return manager.transaction(async (tm) => {
+                await tm.query('SET FOREIGN_KEY_CHECKS=0;');
+                await tm.delete(Model, model.id);
+                return tm.query('SET FOREIGN_KEY_CHECKS=1;');
+            });
         } else {
             return;
         }
