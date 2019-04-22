@@ -22,7 +22,7 @@ class TypeOrmAdapter {
                 } else {
                     await tm.query('SET FOREIGN_KEY_CHECKS=0;');
                 }
-                await tm.delete(Model, model.id);
+                await tm.delete(Model, model.id ? model.id : model.api_id);
                 if (this.connection.options.type === 'sqlite') {
                     return tm.query('PRAGMA foreign_keys = ON;');
                 } else {
