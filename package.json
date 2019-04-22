@@ -1,5 +1,5 @@
 {
-  "name": "factory-girl-typeorm",
+  "name": "@synconset/factory-girl-typeorm",
   "version": "1.1.1",
   "description": "Typeorm adapter for factory-girl",
   "main": "index.js",

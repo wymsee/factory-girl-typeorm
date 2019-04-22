@@ -15,14 +15,21 @@ class TypeOrmAdapter {
     async destroy(model, Model) {
         const manager = this.connection.manager;
         const modelRepo = manager.getRepository(Model);
-        const theModel = await modelRepo.findOne(model.id);
-        if (theModel) {
+        try {
             return manager.transaction(async (tm) => {
-                await tm.query('SET FOREIGN_KEY_CHECKS=0;');
+                if (this.connection.type === 'sqlite') {
+                    await tm.query('PRAGMA foreign_keys = OFF;');
+                } else {
+                    await tm.query('SET FOREIGN_KEY_CHECKS=0;');
+                }
                 await tm.delete(Model, model.id);
+                if (this.connection.type === 'sqlite') {
+                    return tm.query('PRAGMA foreign_keys = ON;');
+                } else {
                 return tm.query('SET FOREIGN_KEY_CHECKS=1;');
+                }
             });
-        } else {
+        } catch (err) {
             return;
         }
     }
