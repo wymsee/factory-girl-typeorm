@@ -18,12 +18,19 @@ class TypeOrmAdapter {
         try {
             if (this.connection.options.type === 'sqlite') {
                 await manager.query('PRAGMA foreign_keys = OFF;');
+            } else if (this.connection.options.type === 'postgres') {
+                await manager.query(`BEGIN;
+                    ALTER TABLE "${modelRepo.metadata.tableName}" DISABLE TRIGGER ALL;`);
             } else {
                 await manager.query('SET FOREIGN_KEY_CHECKS=0;');
             }
             await manager.delete(Model, model.id ? model.id : model.api_id);
             if (this.connection.options.type === 'sqlite') {
                 return manager.query('PRAGMA foreign_keys = ON;');
+            } else if (this.connection.options.type === 'postgres') {
+                await manager.query(`
+                    ALTER TABLE "${modelRepo.metadata.tableName}" ENABLE TRIGGER ALL;
+                    COMMIT;`);
             } else {
                 return manager.query('SET FOREIGN_KEY_CHECKS=1;');
             }
